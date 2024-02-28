@@ -1,7 +1,7 @@
 import User from "../models/user.model.js";
 import bcryptjs from 'bcryptjs';
 
-export const signup = async (req, res) => {
+export const signup = async (req, res, next) => {
     //Retrieves username, email, password from request body
     //The request body typically contains data sent by the client when making an HTTP request, often in JSON format
     const { username, email, password } = req.body;
@@ -14,7 +14,7 @@ export const signup = async (req, res) => {
     //sends a json response indicating successful user creation
     res.status(201).json('user created successfully');
     } catch (error) {
-      res.status(500).json(error.message);
+      next(error);
     }
     
 }
